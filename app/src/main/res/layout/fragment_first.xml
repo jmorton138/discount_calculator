@@ -8,24 +8,69 @@
         tools:context=".FirstFragment">
 
     <TextView
-            android:id="@+id/textview_first"
+            android:id="@+id/discountLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hello_first_fragment"
+            android:text="Discount"
+            app:layout_constraintTop_toBottomOf="@id/priceLabel"
+            app:layout_constraintEnd_toEndOf="@id/priceLabel"
+            android:layout_marginTop="48dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    <TextView
+            android:id="@+id/salePriceLabel"
+            android:text="Sale Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/priceLabel"
+            app:layout_constraintTop_toBottomOf="@+id/discountLabel"
+            android:layout_marginTop="48dp" android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    <TextView
+            android:id="@+id/priceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/button_first"
-    />
-
+            android:layout_marginTop="140dp" app:layout_constraintHorizontal_bias="0.265"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     <Button
-            android:id="@+id/button_first"
+            android:id="@+id/calculateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next"
-            app:layout_constraintTop_toBottomOf="@id/textview_first"
+            android:text="Calculate"
+            app:layout_constraintTop_toBottomOf="@id/salePriceLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-    />
+            app:layout_constraintVertical_bias="0.513"
+            android:layout_marginTop="48dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editTextPrice"
+            app:layout_constraintTop_toTopOf="@id/priceLabel"
+            app:layout_constraintStart_toEndOf="@id/priceLabel"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/priceLabel"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextPercentDiscount"
+            app:layout_constraintTop_toTopOf="@+id/discountLabel"
+            app:layout_constraintStart_toEndOf="@id/discountLabel"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/discountLabel"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/salePriceTotal"
+            app:layout_constraintStart_toEndOf="@+id/salePriceLabel"
+            app:layout_constraintTop_toTopOf="@+id/salePriceLabel" android:layout_marginStart="50dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" tools:text="0.00"
+            app:layout_constraintBottom_toBottomOf="@+id/salePriceLabel"/>
+
 </android.support.constraint.ConstraintLayout>
