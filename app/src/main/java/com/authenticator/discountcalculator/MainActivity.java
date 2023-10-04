@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextPercentDiscount;
     private TextView textSalePriceTotal;
     private Button calculateButton;
+    private Button clearButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         editTextPercentDiscount = findViewById(R.id.editTextPercentDiscount);
         textSalePriceTotal = findViewById(R.id.textSalePriceTotal);
         calculateButton = findViewById(R.id.calculateButton);
+        clearButton = findViewById(R.id.clearInputs);
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editTextPrice.setText("");
+                editTextPercentDiscount.setText("");
+                textSalePriceTotal.setText("");
+            }
+        });
+
     }
     public boolean validateInputs(String priceString, String percentageOff) {
         boolean validated = true;
@@ -64,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         }
         if (TextUtils.isEmpty(percentageOff)) {
             editTextPercentDiscount.setError("Please input a discount percentage.");
+            editTextPercentDiscount.requestFocus();
+            validated = false;
+        } else if (Float.valueOf(percentageOff) >= 100) {
+            editTextPercentDiscount.setError("Please enter a percent less than 100.");
             editTextPercentDiscount.requestFocus();
             validated = false;
         }
