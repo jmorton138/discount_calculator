@@ -1,23 +1,17 @@
 package com.authenticator.discountcalculator;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import com.authenticator.discountcalculator.databinding.ActivityMainBinding;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import java.util.Locale;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -38,31 +32,29 @@ public class MainActivity extends AppCompatActivity {
         textSalePriceTotal = findViewById(R.id.textSalePriceTotal);
         calculateButton = findViewById(R.id.calculateButton);
         clearButton = findViewById(R.id.clearInputs);
-        calculateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editTextPrice.setError(null);
-                editTextPercentDiscount.setError(null);
-                String priceString = editTextPrice.getText().toString();
-                String percentageOff = editTextPercentDiscount.getText().toString();
-                if (validateInputs(priceString, percentageOff)) {
-                    float priceInput = new Float(priceString);
-                    float percentInput = new Float((percentageOff));
-                    float discountedPrice = calculateDiscountedPrice(priceInput, percentInput);
-                    String discountedPriceString = String.format("%.2f", discountedPrice);
-                    textSalePriceTotal.setText(discountedPriceString);
-                }
+        calculateButton.setOnClickListener(view -> {
+            editTextPrice.setError(null);
+            editTextPercentDiscount.setError(null);
+            String priceString = editTextPrice.getText().toString();
+            String percentageOff = editTextPercentDiscount.getText().toString();
 
+            if (validateInputs(priceString, percentageOff)) {
+                float priceInput = Float.parseFloat(priceString);
+                float percentInput = Float.parseFloat(percentageOff);
+
+                float discountedPrice = calculateDiscountedPrice(priceInput, percentInput);
+                String discountedPriceString = String.format(Locale.ENGLISH,"%.2f", discountedPrice);
+
+                textSalePriceTotal.setText(discountedPriceString);
+                System.out.println(textSalePriceTotal.getText());
             }
+
         });
 
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editTextPrice.setText("");
-                editTextPercentDiscount.setText("");
-                textSalePriceTotal.setText("");
-            }
+        clearButton.setOnClickListener(view -> {
+            editTextPrice.setText("");
+            editTextPercentDiscount.setText("");
+            textSalePriceTotal.setText("");
         });
 
     }
@@ -77,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             editTextPercentDiscount.setError("Please input a discount percentage.");
             editTextPercentDiscount.requestFocus();
             validated = false;
-        } else if (Float.valueOf(percentageOff) >= 100) {
+        } else if (Float.parseFloat(percentageOff) >= 100) {
             editTextPercentDiscount.setError("Please enter a percent less than 100.");
             editTextPercentDiscount.requestFocus();
             validated = false;
@@ -86,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public float calculateDiscountedPrice(float beforePrice, float percentageOff) {
         percentageOff = percentageOff/100;
-        float afterDiscountPrice = beforePrice  - (beforePrice * percentageOff);
-        return afterDiscountPrice;
+        return beforePrice  - (beforePrice * percentageOff);
     }
 }

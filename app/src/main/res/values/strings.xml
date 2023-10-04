@@ -1,12 +1,18 @@
 <resources>
-    <string name="app_name">DiscountCalculator</string>
+    <string name="app_name">Discount Calc</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="before_price">Full Price</string>
+    <string name="before_price_hint">e.g., 49.99</string>
+    <string name="percent_off">Percent Off</string>
+    <string name="percent_off_hint">e.g., 10</string>
+    <string name="discounted_price">Sale Price</string>
+    <string name="calculate">Calculate</string>
+    <string name="clear">Clear</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

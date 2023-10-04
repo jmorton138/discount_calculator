@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,11 +7,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
+
     <TextView
             android:id="@+id/priceLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full Price"
+            android:text="@string/before_price"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -20,14 +22,14 @@
             android:id="@+id/discountLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Percent Off"
+            android:text="@string/percent_off"
             app:layout_constraintTop_toBottomOf="@id/priceLabel"
             app:layout_constraintEnd_toEndOf="@id/priceLabel"
             android:layout_marginTop="48dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     <TextView
             android:id="@+id/salePriceLabel"
-            android:text=" Sale Price"
+            android:text="@string/discounted_price"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             app:layout_constraintEnd_toEndOf="@id/priceLabel"
@@ -42,7 +44,8 @@
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/editTextPrice"
-            android:hint="e.g., 49.99"
+            android:hint="@string/before_price_hint"
+            android:autofillHints="Price"
             app:layout_constraintTop_toTopOf="@id/priceLabel"
             app:layout_constraintStart_toEndOf="@id/priceLabel"
             android:layout_marginStart="10dp"
@@ -53,7 +56,8 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/editTextPercentDiscount"
-            android:hint="e.g., 10"
+            android:autofillHints="Percentage"
+            android:hint="@string/percent_off_hint"
             app:layout_constraintTop_toTopOf="@+id/discountLabel"
             app:layout_constraintStart_toEndOf="@id/discountLabel"
             android:layout_marginStart="10dp"
@@ -70,7 +74,7 @@
             android:id="@+id/calculateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Calculate"
+            android:text="@string/calculate"
             app:layout_constraintTop_toBottomOf="@id/salePriceLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,10 +83,26 @@
             android:id="@+id/clearInputs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear"
+            android:text="@string/clear"
             app:layout_constraintTop_toBottomOf="@id/salePriceLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="48dp" android:background="#FF335B" app:layout_constraintHorizontal_bias="0.207"/>
-
+    <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#33FFD7"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize" android:id="@+id/toolbar2">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:layout_gravity="center"
+                android:id="@+id/toolbar_title" android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                tools:layout_editor_absoluteY="18dp" tools:layout_editor_absoluteX="163dp" android:textColor="#040404"/>
+    </android.support.v7.widget.Toolbar>
 </android.support.constraint.ConstraintLayout>
