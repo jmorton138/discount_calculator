@@ -3,6 +3,7 @@ package com.authenticator.discountcalculator;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         editTextPrice = findViewById(R.id.editTextPrice);
+        editTextPrice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10, 2)});
         editTextPercentDiscount = findViewById(R.id.editTextPercentDiscount);
         textSalePriceTotal = findViewById(R.id.textSalePriceTotal);
         calculateButton = findViewById(R.id.calculateButton);
