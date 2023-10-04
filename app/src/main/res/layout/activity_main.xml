@@ -1,13 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".MainActivity">
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+    <TextView
+            android:id="@+id/priceLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="140dp" app:layout_constraintHorizontal_bias="0.265"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    <TextView
+            android:id="@+id/discountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discount"
+            app:layout_constraintTop_toBottomOf="@id/priceLabel"
+            app:layout_constraintEnd_toEndOf="@id/priceLabel"
+            android:layout_marginTop="48dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    <TextView
+            android:id="@+id/salePriceLabel"
+            android:text="Sale Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/priceLabel"
+            app:layout_constraintTop_toBottomOf="@+id/discountLabel"
+            android:layout_marginTop="48dp" android:layout_marginEnd="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
+    <Button
+            android:id="@+id/calculateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            app:layout_constraintTop_toBottomOf="@id/salePriceLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.513"
+            android:layout_marginTop="48dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editTextPrice"
+            app:layout_constraintTop_toTopOf="@id/priceLabel"
+            app:layout_constraintStart_toEndOf="@id/priceLabel"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/priceLabel"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextPercentDiscount"
+            app:layout_constraintTop_toTopOf="@+id/discountLabel"
+            app:layout_constraintStart_toEndOf="@id/discountLabel"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/discountLabel"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textSalePriceTotal"
+            app:layout_constraintStart_toEndOf="@+id/salePriceLabel"
+            app:layout_constraintTop_toTopOf="@+id/salePriceLabel" android:layout_marginStart="50dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" tools:text="0.00"/>
 
-<include layout="@layout/content_main"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>
