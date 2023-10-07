@@ -16,7 +16,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="120dp" app:layout_constraintHorizontal_bias="0.2"
+            android:layout_marginTop="120dp" app:layout_constraintHorizontal_bias="0.181"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     <TextView
             android:id="@+id/discountLabel"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="@string/percent_off"
             app:layout_constraintTop_toBottomOf="@id/priceLabel"
-            app:layout_constraintEnd_toEndOf="@id/priceLabel"
+            app:layout_constraintStart_toStartOf="@id/priceLabel"
             android:layout_marginTop="48dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
     <TextView
@@ -32,14 +32,14 @@
             android:text="@string/discounted_price"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            app:layout_constraintEnd_toEndOf="@id/priceLabel"
+            app:layout_constraintStart_toStartOf="@id/priceLabel"
             app:layout_constraintTop_toBottomOf="@+id/discountLabel"
             android:layout_marginTop="48dp" android:layout_marginEnd="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
 
     <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
@@ -48,10 +48,12 @@
             android:autofillHints="Price"
             app:layout_constraintTop_toTopOf="@id/priceLabel"
             app:layout_constraintStart_toEndOf="@id/priceLabel"
-            android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/priceLabel" android:minHeight="48dp"/>
+            android:layout_marginStart="50dp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/priceLabel" android:minHeight="48dp"
+            app:layout_constraintVertical_bias="0.555"/>
     <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
@@ -59,35 +61,35 @@
             android:autofillHints="Percentage"
             android:hint="@string/percent_off_hint"
             app:layout_constraintTop_toTopOf="@+id/discountLabel"
-            app:layout_constraintStart_toEndOf="@id/discountLabel"
-            android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="@id/editTextPrice"
             app:layout_constraintBottom_toBottomOf="@+id/discountLabel" android:minHeight="48dp"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textSalePriceTotal"
-            app:layout_constraintStart_toEndOf="@+id/salePriceLabel"
-            app:layout_constraintEnd_toEndOf="@id/priceLabel"
-            app:layout_constraintTop_toTopOf="@+id/salePriceLabel" android:layout_marginStart="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/editTextPrice"
+            app:layout_constraintTop_toTopOf="@+id/salePriceLabel"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" tools:text="0.00"/>
     <Button
+            android:id="@+id/clearInputs"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:text="@string/clear"
+            android:layout_marginTop="38dp"
+            app:layout_constraintTop_toBottomOf="@id/salePriceLabel"
+            app:layout_constraintStart_toStartOf="@+id/priceLabel"
+            android:background="#FF335B"
+             />
+    <Button
             android:id="@+id/calculateButton"
-            android:layout_width="wrap_content"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:text="@string/calculate"
             app:layout_constraintTop_toBottomOf="@id/salePriceLabel"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="48dp" android:background="#33FFD7" app:layout_constraintHorizontal_bias="0.743"/>
-    <Button
-            android:id="@+id/clearInputs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/clear"
-            app:layout_constraintTop_toBottomOf="@id/salePriceLabel"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="48dp" android:background="#FF335B" app:layout_constraintHorizontal_bias="0.207"/>
+            app:layout_constraintTop_toTopOf="@id/clearInputs"
+            android:background="#33FFD7"
+            app:layout_constraintEnd_toEndOf="@+id/editTextPrice"/>
+
     <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
