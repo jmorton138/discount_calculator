@@ -1,71 +1,83 @@
 package com.authenticator.discountcalculator;
 
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import android.text.InputFilter;
+import android.text.TextUtils;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import com.authenticator.discountcalculator.databinding.ActivityMainBinding;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import java.util.Locale;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private EditText editTextPrice;
+    private EditText editTextPercentDiscount;
+    private TextView textSalePriceTotal;
+    private Button calculateButton;
+    private Button clearButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        editTextPrice = findViewById(R.id.editTextPrice);
+        editTextPrice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(10, 2)});
+        editTextPercentDiscount = findViewById(R.id.editTextPercentDiscount);
+        textSalePriceTotal = findViewById(R.id.textSalePriceTotal);
+        calculateButton = findViewById(R.id.calculateButton);
+        clearButton = findViewById(R.id.clearInputs);
+        calculateButton.setOnClickListener(view -> {
+            editTextPrice.setError(null);
+            editTextPercentDiscount.setError(null);
+            String priceString = editTextPrice.getText().toString();
+            String percentageOff = editTextPercentDiscount.getText().toString();
 
-        setSupportActionBar(binding.toolbar);
+            if (validateInputs(priceString, percentageOff)) {
+                float priceInput = Float.parseFloat(priceString);
+                float percentInput = Float.parseFloat(percentageOff);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+                float discountedPrice = calculateDiscountedPrice(priceInput, percentInput);
+                String discountedPriceString = String.format(Locale.ENGLISH,"%.2f", discountedPrice);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                textSalePriceTotal.setText(discountedPriceString);
+                System.out.println(textSalePriceTotal.getText());
             }
+
         });
+
+        clearButton.setOnClickListener(view -> {
+            editTextPrice.setText("");
+            editTextPercentDiscount.setText("");
+            textSalePriceTotal.setText("");
+        });
+
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public boolean validateInputs(String priceString, String percentageOff) {
+        boolean validated = true;
+        if (TextUtils.isEmpty(priceString)) {
+            editTextPrice.setError("Please input a price.");
+            editTextPrice.requestFocus();
+            validated = false;
         }
-
-        return super.onOptionsItemSelected(item);
+        if (TextUtils.isEmpty(percentageOff)) {
+            editTextPercentDiscount.setError("Please input a discount percentage.");
+            editTextPercentDiscount.requestFocus();
+            validated = false;
+        } else if (Float.parseFloat(percentageOff) >= 100) {
+            editTextPercentDiscount.setError("Please enter a percent less than 100.");
+            editTextPercentDiscount.requestFocus();
+            validated = false;
+        }
+        return validated;
     }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+    public float calculateDiscountedPrice(float beforePrice, float percentageOff) {
+        percentageOff = percentageOff/100;
+        return beforePrice  - (beforePrice * percentageOff);
     }
 }
