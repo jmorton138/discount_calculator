@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         editTextPrice = findViewById(R.id.editTextPrice);
-git         // Sets max number of digits user can input to 7, and prevents user from entering
+        // Sets max number of digits user can input to 7, and prevents user from entering
         // more than 2 decimal places
         editTextPrice.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(7, 2)});
         editTextPercentDiscount = findViewById(R.id.editTextPercentDiscount);
